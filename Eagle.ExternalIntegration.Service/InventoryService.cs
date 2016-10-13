@@ -16,7 +16,7 @@ namespace Eagle.ExternalIntegration.Service
 			DataModel.RMSContext ctx = new DataModel.RMSContext();
 			SqlParameter skuParam = new SqlParameter("@SKU", sku);
 			// todo: poner info correcta
-			var result = ctx.Database.SqlQuery<RmsStokDto>("pOYM_RetornarStockSKU @SKU", skuParam).ToList();
+			var result = ctx.Database.SqlQuery<RmsStokDto>("juntoz_RetornarStockSKU @SKU", skuParam).ToList();
 			
 			// placeholder
 			return new ProductStockDTO()
