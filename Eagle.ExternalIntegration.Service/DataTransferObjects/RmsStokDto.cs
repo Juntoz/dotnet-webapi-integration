@@ -12,5 +12,6 @@ namespace Eagle.ExternalIntegration.Service.DataTransferObjects
         public int StoreNo { get; set; }
         public string StoreName { get; set; }
         public decimal OnHandQty { get; set; }
-    }
+		public decimal RetailPrice { get; set; }
+	}
 }

@@ -24,7 +24,7 @@ namespace Eagle.ExternalIntegrationWebApi.Controllers
 				}
 			}
 
-			Eagle.ExternalIntegration.Service.InventoryService inventorySvc = new ExternalIntegration.Service.InventoryService();
+			var inventorySvc = new ExternalIntegration.Service.InventoryService();
 			var products = inventorySvc.GetInventoryBySku(sku, warehouseIdentifiers);
 
 			return Ok(products);

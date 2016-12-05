@@ -17,11 +17,16 @@ namespace Eagle.ExternalIntegration.Service
 			SqlParameter skuParam = new SqlParameter("@SKU", sku);
 			// todo: poner info correcta
 			var result = ctx.Database.SqlQuery<RmsStokDto>("juntoz_RetornarStockSKU @SKU", skuParam).ToList();
+
+			if(result.Count == 0)
+			{
+				return null;
+			}
 			
 			// placeholder
 			return new ProductStockDTO()
 			{
-				Price = 0,
+				Price = result.FirstOrDefault().RetailPrice,
 				SKU = sku,
 				TotalQuantity = (int)result.Sum(x=> x.OnHandQty),
 				StockByWarehouse = from w in result
