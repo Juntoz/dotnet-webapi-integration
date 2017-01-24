@@ -9,7 +9,7 @@ namespace Eagle.ExternalIntegration.Service.DataModel
 {
 	public class RMSContext : DbContext
 	{
-		public RMSContext(): base("name=RmsDbConnectionString")
+		public RMSContext(): base("name=InventoryDbConnectionString")
 		{
 			// do not init the DB
 			Database.SetInitializer<RMSContext>(null);
