@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Eagle.ExternalIntegration.Service.DataTransferObjects;
+using System.Configuration;
 
 namespace Eagle.ExternalIntegration.Service
 {
@@ -15,8 +16,13 @@ namespace Eagle.ExternalIntegration.Service
 			// todo: amarrar a entity framework y ejecutar sp o linq
 			DataModel.RMSContext ctx = new DataModel.RMSContext();
 			SqlParameter skuParam = new SqlParameter("@SKU", sku);
-			// todo: poner info correcta
-			var result = ctx.Database.SqlQuery<RmsStokDto>("juntoz_RetornarStockSKU @SKU", skuParam).ToList();
+			skuParam.DbType = System.Data.DbType.String;
+
+			string stockQuery = ConfigurationManager.AppSettings["stockQuery"];
+			if (stockQuery == null)
+				stockQuery = "EXEC juntoz_RetornarStockSKU @SKU";
+			
+			var result = ctx.Database.SqlQuery<RmsStokDto>(stockQuery, skuParam).ToList();
 
 			if(result.Count == 0)
 			{
