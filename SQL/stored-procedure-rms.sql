@@ -6,7 +6,9 @@ Create Procedure juntoz_RetornarStockSKU
 as  
 select 
 cast(STP.SKU as nvarchar) as sku,
-STP.StoreNo,ST.StoreName,STP.OnHandQty   
+STP.StoreNo,ST.StoreName,STP.OnHandQty,
+cast(p.RetailPrice as decimal) as RetailPrice  
 from PRODUCT_STORE AS STP  
-INNER JOIN STORE AS ST ON (ST.StoreNo=STP.StoreNo)  
-Where SKU=@SKU and OnHandQty>0  
+INNER JOIN STORE AS ST ON (ST.StoreNo=STP.StoreNo)
+inner join PRODUCT as p on STP.SKU = p.SKU
+Where stp.SKU=@SKU
